@@ -1209,7 +1209,8 @@ ApiKeyAuthorization.prototype.apply = function (obj) {
     return true;
   } else if (this.type === 'header') {
     if(typeof obj.headers[this.name] === 'undefined') {
-      obj.headers[this.name] = this.value;
+      if (window.swaggerUi.api.securityDefinitions.api_key.prefix_token != null)
+        obj.headers[this.name] = window.swaggerUi.api.securityDefinitions.api_key.prefix_token + this.value;
     }
 
     return true;
